@@ -1,4 +1,4 @@
-(function toDo() {
+(() => {
 
     const DATE_ELEMENT = document.getElementById("date");
     const LIST_ELEMENT = document.getElementById("list");
@@ -17,20 +17,20 @@
 
     DATE_ELEMENT.innerHTML = TODAY.toLocaleDateString("en-US", OPTIONS);
 
-    (function getJSON() {
+    (() => {
         fetch(ADDRESS)
       .then(response => response.json())
       .then(json => addToList(json));
     })();
 
-    function addToList(todos) {
+    let addToList = (todos) => {
 
         for (let todo of todos){
             addToDo(todo.title, todo.id, todo.completed);
         }
-    }
+    };
 
-    function addToDo(toDo, id, completed = false, trash = false) {
+    let addToDo = (toDo, id, completed = false, trash = false) => {
 
         if(trash){ return; }
 
@@ -54,9 +54,10 @@
                     trash : trash
                 });
 
-    }
+    };
 
-    document.addEventListener("keyup", function (even) {
+    document.addEventListener("keyup", (even) => {
+
         if(even.keyCode == 13){
             let max = 0;
             for(let i of toDosList){
@@ -74,23 +75,26 @@
         }
     });
 
-    function completeToDO(id) {
+    let completeToDO = (id) => {
+
         let element = document.getElementById(id);
         element.classList.toggle(CHECK);
         element.classList.toggle(UNCHECK);
         element.parentNode.querySelector(".text").classList.toggle(LINE_THROUGH);
 
         toDosList[element.id].completed = !toDosList[element.id].completed;
-    }
+    };
 
-    function removeToDO(id) {
+    let removeToDO = (id) => {
+
         let element = document.getElementById(id);
         element.parentNode.parentNode.removeChild(element.parentNode);
 
         toDosList[element.id].trash = true;
-    }
+    };
 
-    LIST_ELEMENT.addEventListener("click", function (event) {
+    LIST_ELEMENT.addEventListener("click", (event) => {
+
         const element = event.target;
         const elementJob = element.dataset.job;
 
@@ -101,7 +105,8 @@
         }
     });
 
-    ADD_BUTTON_ELEMENT.addEventListener("click", function (event) {
+    ADD_BUTTON_ELEMENT.addEventListener("click", (event) => {
+
         const element = event.target;
         const elementJob = element.dataset.job;
 
