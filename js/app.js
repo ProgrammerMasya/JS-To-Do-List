@@ -74,7 +74,8 @@
         }
     });
 
-    function completeToDO(element) {
+    function completeToDO(id) {
+        let element = document.getElementById(id);
         element.classList.toggle(CHECK);
         element.classList.toggle(UNCHECK);
         element.parentNode.querySelector(".text").classList.toggle(LINE_THROUGH);
@@ -82,7 +83,8 @@
         toDosList[element.id].completed = !toDosList[element.id].completed;
     }
 
-    function removeToDO(element) {
+    function removeToDO(id) {
+        let element = document.getElementById(id);
         element.parentNode.parentNode.removeChild(element.parentNode);
 
         toDosList[element.id].trash = true;
@@ -93,9 +95,9 @@
         const elementJob = element.dataset.job;
 
         if(elementJob === "complete"){
-            completeToDO(element);
+            completeToDO(element.id);
         }else if(elementJob === "delete"){
-            removeToDO(element);
+            removeToDO(element.id);
         }
     });
 
